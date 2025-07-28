@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NITI Vision</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #f4a300; }
+    .logo img { height: 40px; vertical-align: middle; }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      padding: 8px 12px;
+    }
+    nav a:hover { background: black; color: white; }
+    .auth-buttons a {
+      margin-left: 10px;
+      background: black;
+      color: white;
+      text-decoration: none;
+      padding: 6px 10px;
+    }
+    .slider-container { position: relative; overflow: hidden; width: 100%; max-height: 400px; }
+    .slider { display: flex; transition: transform 0.5s ease-in-out; width: 300%; }
+    .slider img { width: 100%; height: auto; object-fit: cover; }
+    #content { padding: 20px; min-height: 200px; background: #f9f9f9; text-align: center; }
+    footer { display: flex; justify-content: space-around; background: #e6e6e6; padding: 20px; font-size: 14px; }
+    footer div { max-width: 200px; }
+    footer h4 { margin-bottom: 10px; }
+    footer a { display: block; text-decoration: none; color: #000; margin-bottom: 5px; }
+    .copyright { background: #f4a300; text-align: center; padding: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <style>
+  .logo {
+    display: flex;
+    align-items: center;
+    width: 300px; /* Increase width as needed */
+  }
+
+  .logo img {
+    height: 60px;  /* Adjust for larger size */
+    width: auto;
+    margin-right: 10px;
+  }
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .logo-text strong:first-child {
+    color: red;
+  }
+
+  .logo-text strong:last-child {
+    color: blue;
+  }
+</style>
+
+<div class="logo">
+  <img th:src="@{/images/logo.jpg}" alt="Logo" width="200"/>
+  <div class="logo-text">
+    <strong>NITI</strong> <strong>VISION</strong>
+  </div>
+</div>
+  <nav>
+    <a href="/index">HOME</a>
+    <a href="/about">ABOUT US</a>
+     <a href="/services">SERVICES</a>
+    <a href="/portfolio">PORTFOLIO</a>
+    <a href="/blog">BLOG</a>
+    <a href="/contact">CONTACT</a>
+  </nav>
+  <div class="auth-buttons">
+    <a href="#">SIGN UP</a>
+    <a href="#">SIGN IN</a>
+  </div>
+</header>
+
+<!-- Slider -->
+  <style>
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background: #f4f4f4;
+}
+
+.slider-container {
+ width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  width: 500%; /* 5 slides */
+  height: 100%;
+  animation: slideShow 25s infinite;
+}
+
+.slide {
+  flex: 0 0 100%;
+  height: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Dots */
+.dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dots span {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  animation: dotPulse 25s infinite;
+}
+
+.dots span:nth-child(11) { animation-delay: 0s; }
+.dots span:nth-child(22) { animation-delay: 5s; }
+.dots span:nth-child(3) { animation-delay: 10s; }
+.dots span:nth-child(4) { animation-delay: 15s; }
+.dots span:nth-child(5) { animation-delay: 20s; }
+
+@keyframes slideShow {
+  0%   { transform: translateX(0%); }
+  20%  { transform: translateX(0%); }
+  25%  { transform: translateX(-100%); }
+  45%  { transform: translateX(-100%); }
+  50%  { transform: translateX(-200%); }
+  70%  { transform: translateX(-200%); }
+  75%  { transform: translateX(-300%); }
+  95%  { transform: translateX(-300%); }
+  100% { transform: translateX(-400%); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { background: #ccc; }
+  10%, 90% { background: #007bff; }
+}
+  </style>
+
+
+<div class="slider-container">
+  <div class="slider">
+  <div class="slider" id="slider">
+    <div class="slides">
+      <div class="slide"><img th:src="@{/images/slide13.jpg}" alt="Slide 1"></div>
+	      <div class="slide"><img th:src="@{/images/slide22.jpg}" alt="Slide 2"></div>
+	      <div class="slide"><img th:src="@{/images/slide3.png}" alt="Slide 3"></div>
+	      <div class="slide"><img th:src="@{/images/slide4.png}" alt="Slide 4"></div>
+	      <div class="slide"><img th:src="@{/images/slide5.png}" alt="Slide 5"></div>
+    </div>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Dynamic Content -->
+<div id="content">
+ <h2>ABOUT US</h2>
+<p>NITI Vision is a forward-thinking initiative committed to empowering India's future.</p>
+<p>We focus on innovation, skill development, and sustainable growth across sectors.</p>
+<p>Our mission is to bridge the gap between talent and opportunity nationwide.</p>
+<p>Through technology and collaboration, we drive inclusive development.</p>
+<p>We work with public and private partners to deliver impactful programs.</p>
+<p>Our team includes experts, educators, and industry leaders.</p>
+<p>We believe in creating opportunities for every citizen to grow and thrive.</p>
+<p>Transparency, integrity, and excellence are at the core of our values.</p>
+<p>Together, we envision a self-reliant and globally competitive India.</p>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div>
+    <h4>PROJECT NITI VISION</h4>
+    To build a skilled, self-reliant workforce and boost product innovation across sectors...
+  </div>
+  <div>
+    <h4>QUICK LINKS</h4>
+    <a href="/index">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/services">Services</a>
+    <a href="/portfolio">Partfolio</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact Us</a>
+  </div>
+  <div>
+    <h4>GET IN TOUCH</h4>
+    Address: KASNA, Road no-1<br>
+    PIN Code: 201310<br>
+    Phone: 7249850707
+  </div>
+</footer>
+
+<div class="copyright">
+  © 2024 All Rights Reserved by NITI Vision.
+</div>
+
+<!-- Scripts -->
+<script>
+  // Auto slider
+  let currentSlide = 0;
+  setInterval(() => {
+    const slider = document.getElementById('slider');
+    const slides = slider.children.length;
+    currentSlide = (currentSlide + 1) % slides;
+    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }, 5000);
+
+  // Load dynamic content
+  function loadContent(page, event) {
+    if (event) event.preventDefault();
+    fetch('content?page=' + page)
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('content').innerHTML = data;
+      })
+      .catch(() => {
+        document.getElementById('content').innerHTML = '<p>Failed to load content.</p>';
+      });
+  }
+</script>
+
+</body>
+</html>
