@@ -1,27 +1,28 @@
-/*function toggleMenu() {
+function toggleMenu() {
   const menu = document.getElementById("sideMenu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-// Auto slider
-let currentSlide = 0;
-setInterval(() => {
-  const slider = document.getElementById('slider');
-  const slides = slider.children.length;
-  currentSlide = (currentSlide + 1) % slides;
-  slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-}, 5000);
-
-// Load dynamic content
-function loadContent(page, event) {
-  if (event) event.preventDefault();
-  fetch('content?page=' + page)
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('content').innerHTML = data;
-    })
-    .catch(() => {
-      document.getElementById('content').innerHTML = '<p>Failed to load content.</p>';
-    });
-}
-*/
+var swiper = new Swiper(".mySwiperHorizontal", {
+  slidesPerView: 5,
+  spaceBetween: 5,
+  loop: true,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  breakpoints: {
+    1024: { slidesPerView: 5 },
+    768: { slidesPerView: 3 },
+    480: { slidesPerView: 2 },
+    320: { slidesPerView: 1 },
+  }
+});
