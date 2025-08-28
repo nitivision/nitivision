@@ -1,267 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+ <head>
   <meta charset="UTF-8">
-  <title>NITI Vision</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #f4a300; }
-    .logo img { height: 40px; vertical-align: middle; }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      padding: 8px 12px;
-    }
-    nav a:hover { background: black; color: white; }
-    .auth-buttons a {
-      margin-left: 10px;
-      background: black;
-      color: white;
-      text-decoration: none;
-      padding: 6px 10px;
-    }
-    .slider-container { position: relative; overflow: hidden; width: 100%; max-height: 400px; }
-    .slider { display: flex; transition: transform 0.5s ease-in-out; width: 300%; }
-    .slider img { width: 100%; height: auto; object-fit: cover; }
-    #content { padding: 20px; min-height: 200px; background: #f9f9f9; text-align: center; }
-    footer { display: flex; justify-content: space-around; background: #e6e6e6; padding: 20px; font-size: 14px; }
-    footer div { max-width: 200px; }
-    footer h4 { margin-bottom: 10px; }
-    footer a { display: block; text-decoration: none; color: #000; margin-bottom: 5px; }
-    .copyright { background: #f4a300; text-align: center; padding: 10px; font-weight: bold; }
-  </style>
+  <title>About Us</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/aboutstyles.css}">
+  <link rel="stylesheet" th:href="@{/css/services.css}">
+  <link rel="stylesheet" th:href="@{/css/blog.css}">
 </head>
 <body>
 
-<!-- Header -->
-<header>
-  <style>
-  .logo {
-    display: flex;
-    align-items: center;
-    width: 300px; /* Increase width as needed */
-  }
-
-  .logo img {
-    height: 60px;  /* Adjust for larger size */
-    width: auto;
-    margin-right: 10px;
-  }
-
-  .logo-text {
-    font-size: 24px;
-    font-weight: bold;
-    white-space: nowrap;
-  }
-
-  .logo-text strong:first-child {
-    color: red;
-  }
-
-  .logo-text strong:last-child {
-    color: blue;
-  }
-</style>
-
-<div class="logo">
-  <img th:src="@{/images/logo.jpg}" alt="Logo" width="200"/>
-  <div class="logo-text">
-    <strong>NITI</strong> <strong>VISION</strong>
-  </div>
-</div>
-  <nav>
-    <a href="/index">HOME</a>
-    <a href="/about">ABOUT US</a>
-     <a href="/services">SERVICES</a>
-    <a href="/portfolio">PORTFOLIO</a>
-    <a href="/blog">BLOG</a>
-    <a href="/contact">CONTACT</a>
-  </nav>
-  <div class="auth-buttons">
-    <a href="#">SIGN UP</a>
-    <a href="#">SIGN IN</a>
-  </div>
-</header>
-
-<!-- Slider -->
-  <style>
- * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  background: #f4f4f4;
-}
-
-.slider-container {
- width: 100%;
-  overflow: hidden;
-}
-
-.slider {
-  position: relative;
-  width: 100%;
-  height: 450px;
-  overflow: hidden;
-}
-
-.slides {
-  display: flex;
-  width: 500%; /* 5 slides */
-  height: 100%;
-  animation: slideShow 25s infinite;
-}
-
-.slide {
-  flex: 0 0 100%;
-  height: 100%;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Dots */
-.dots {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.dots span {
-  width: 12px;
-  height: 12px;
-  background: #ccc;
-  border-radius: 50%;
-  display: inline-block;
-  animation: dotPulse 25s infinite;
-}
-
-.dots span:nth-child(11) { animation-delay: 0s; }
-.dots span:nth-child(22) { animation-delay: 5s; }
-.dots span:nth-child(3) { animation-delay: 10s; }
-.dots span:nth-child(4) { animation-delay: 15s; }
-.dots span:nth-child(5) { animation-delay: 20s; }
-
-@keyframes slideShow {
-  0%   { transform: translateX(0%); }
-  20%  { transform: translateX(0%); }
-  25%  { transform: translateX(-100%); }
-  45%  { transform: translateX(-100%); }
-  50%  { transform: translateX(-200%); }
-  70%  { transform: translateX(-200%); }
-  75%  { transform: translateX(-300%); }
-  95%  { transform: translateX(-300%); }
-  100% { transform: translateX(-400%); }
-}
-
-@keyframes dotPulse {
-  0%, 100% { background: #ccc; }
-  10%, 90% { background: #007bff; }
-}
-  </style>
-
-
-<div class="slider-container">
-  <div class="slider">
-  <div class="slider" id="slider">
-    <div class="slides">
-      <div class="slide"><img th:src="@{/images/slide13.jpg}" alt="Slide 1"></div>
-	      <div class="slide"><img th:src="@{/images/slide22.jpg}" alt="Slide 2"></div>
-	      <div class="slide"><img th:src="@{/images/slide3.png}" alt="Slide 3"></div>
-	      <div class="slide"><img th:src="@{/images/slide4.png}" alt="Slide 4"></div>
-	      <div class="slide"><img th:src="@{/images/slide5.png}" alt="Slide 5"></div>
-    </div>
-    <div class="dots">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    </div>
-  </div>
-</div>
-
-
-
+<main layout:fragment="content">
 <!-- Dynamic Content -->
-<div id="content">
- <h2>ABOUT US</h2>
-<p>NITI Vision is a forward-thinking initiative committed to empowering India's future.</p>
-<p>We focus on innovation, skill development, and sustainable growth across sectors.</p>
-<p>Our mission is to bridge the gap between talent and opportunity nationwide.</p>
-<p>Through technology and collaboration, we drive inclusive development.</p>
-<p>We work with public and private partners to deliver impactful programs.</p>
-<p>Our team includes experts, educators, and industry leaders.</p>
-<p>We believe in creating opportunities for every citizen to grow and thrive.</p>
-<p>Transparency, integrity, and excellence are at the core of our values.</p>
-<p>Together, we envision a self-reliant and globally competitive India.</p>
+<div class="services-header">
+        <h2>About <span class="brand">Niti Vision</span></h2>
+        <p>Niti Vision is committed to driving growth and innovation by providing expert consulting, manpower, HR, and technology solutions that empower businesses to succeed in a changing world.</p>
+    </div>
+  <section class="about-two-col">
+  <div class="about-image">
+    <img th:src="@{/images/aboutus.jpg}" alt="About NITI Vision">
+  </div>
+  <div class="about-content">
+    <h2>About Us</h2>
+    <p>
+      At <strong>NITI Vision</strong>, we believe that people, ideas, and innovation are the foundation of lasting success. 
+      We are a forward-looking consulting and workforce solutions partner dedicated to empowering businesses, 
+      transforming careers, and driving sustainable growth.
+    </p>
+
+    <p>
+      Founded with a vision to bridge the gap between talent and opportunity, 
+      NITI Vision offers end-to-end services in <em>Consulting, HR Solutions, Manpower Supply, and Web Development</em>. 
+      We work hand-in-hand with organizations to optimize processes, enhance productivity, 
+      and implement future-ready solutions that deliver real impact.
+    </p>
+    </div>
+</section>
+<section class="about-values">
+  <div class="value-card">
+    <div class="icon">🎯</div>
+    <h3>Our Mission</h3>
+    <p>
+      To empower businesses with strategic solutions and help individuals achieve their professional aspirations 
+      by creating an ecosystem of growth, trust, and innovation.
+    </p>
+  </div>
+
+  <div class="value-card">
+    <div class="icon">👁️</div>
+    <h3>Our Vision</h3>
+    <p>
+      To become a trusted global partner for organizations and professionals by consistently delivering 
+      excellence, integrity, and innovation across industries.
+    </p>
+  </div>
+</section>
+  <section class="about-why-section">
+    <h2>Why Choose Us?</h2>
+    <ul>
+      <li>✅ Expert team with diverse industry experience</li>
+      <li>✅ Tailored solutions for startups, SMEs, and enterprises</li>
+      <li>✅ Strong focus on compliance, quality, and transparency</li>
+      <li>✅ Proven track record of delivering value-driven results</li>
+    </ul>
+</section>
+<section class="container my-4">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Who We Are</h2>
+        <p class="text-muted small">
+            At <strong>Niti Vision</strong>, we empower businesses and individuals with innovative digital solutions 
+            and trusted manpower services. Our leadership is built on experience, passion, and a commitment to excellence.
+        </p>
+    </div>
+
+  <div class="container my-5">
+    <!-- Row 1: Nitesh (Card Left, Text Right) -->
+    <div class="row align-items-stretch mb-5">
+        <!-- Card -->
+        <div class="col-md-5 d-flex justify-content-center mb-3 mb-md-0">
+            <div class="card shadow-sm border-0 text-center p-4 h-100 d-flex flex-column" 
+                 style="width: 280px; min-height: 350px;">
+                <img th:src="@{/images/nitesh.jpg}" 
+                     alt="Mr. Nitesh Kumar"
+                     class="img-fluid rounded mb-3 mx-auto"
+                     style="height:220px; width:220px; object-fit:cover;">
+                <h5 class="fw-bold mb-1">Mr. Nitesh Kumar</h5>
+                <p class="text-muted small mb-3">Founder & Director</p>
+            </div>
+        </div>
+        <!-- Text -->
+        <div class="col-md-7 d-flex">
+            <div class="p-4 w-100 h-100 d-flex flex-column justify-content-center" 
+                 style="min-height: 350px;">
+                <p class="fs-6 text-muted mb-0">
+                    Nitesh specializes in operations and strategy. He leads Niti Vision with a mission 
+                    to bring innovative digital solutions to clients worldwide.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2: Guddi (Text Left, Card Right) -->
+    <div class="row align-items-stretch mb-5 flex-row-reverse">
+        <!-- Card -->
+        <div class="col-md-5 d-flex justify-content-center mb-3 mb-md-0">
+            <div class="card shadow-sm border-0 text-center p-4 h-100 d-flex flex-column" 
+                 style="width: 280px; min-height: 350px;">
+                <img th:src="@{/images/guddi.jpg}" 
+                     alt="Mrs. Guddi Rani"
+                     class="img-fluid rounded mb-3 mx-auto"
+                     style="height:220px; width:220px; object-fit:cover;">
+                <h5 class="fw-bold mb-1">Mrs. Guddi Rani</h5>
+                <p class="text-muted small mb-3 text-nowrap">
+                Co-Founder & Managing Director (MD)
+                </p>
+            </div>
+        </div>
+        <!-- Text -->
+        <div class="col-md-7 d-flex">
+            <div class="p-4 w-100 h-100 d-flex flex-column justify-content-center" 
+                 style="min-height: 350px;">
+                <p class="fs-6 text-muted mb-0">
+                    Guddi specializes in operations and talent development. She ensures that 
+                    Niti Vision’s workforce solutions align with clients’ evolving business needs.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Footer -->
-<footer>
-  <div>
-    <h4>PROJECT NITI VISION</h4>
-    To build a skilled, self-reliant workforce and boost product innovation across sectors...
-  </div>
-  <div>
-    <h4>QUICK LINKS</h4>
-    <a href="/index">Home</a>
-    <a href="/about">About Us</a>
-    <a href="/services">Services</a>
-    <a href="/portfolio">Partfolio</a>
-    <a href="/blog">Blog</a>
-    <a href="/contact">Contact Us</a>
-  </div>
-  <div>
-    <h4>GET IN TOUCH</h4>
-    Address: KASNA, Road no-1<br>
-    PIN Code: 201310<br>
-    Phone: 7249850707
-  </div>
-</footer>
+</section>
 
-<div class="copyright">
-  © 2024 All Rights Reserved by NITI Vision.
+
+
+<div class="partners-title">Our Partners</div>
+<div class="swiper mySwiperHorizontal">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><a href="https://www.flipkartcareers.com/#!/%23!" target="_blank"><img th:src="@{/images/flipcart.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://blinkit.com/careers/aboutus?srsltid=AfmBOoqlghpKNMXC3MqTVlXkKAh1gs2kWzwj-fzEo7pqRUGihiL6uqok" target="_blank"><img th:src="@{/images/blinkit.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://relianceretail.com/reliance-digital.html" target="_blank"><img th:src="@{/images/reliancedigi.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://careers.bigbasket.com/#OurJourney" target="_blank"><img th:src="@{/images/bigbasket.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://life.myntra.com/myntra-life/" target="_blank"><img th:src="@{/images/myntra.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://www.angelone.in/careers" target="_blank"><img th:src="@{/images/telecaller.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><img th:src="@{/images/hospital.jpg}" alt="" /></div>
+    <!-- Add more as needed -->
+  </div>
+  <!-- Navigation buttons -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-pagination"></div>
 </div>
 
-<!-- Scripts -->
-<script>
-  // Auto slider
-  let currentSlide = 0;
-  setInterval(() => {
-    const slider = document.getElementById('slider');
-    const slides = slider.children.length;
-    currentSlide = (currentSlide + 1) % slides;
-    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-  }, 5000);
-
-  // Load dynamic content
-  function loadContent(page, event) {
-    if (event) event.preventDefault();
-    fetch('content?page=' + page)
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('content').innerHTML = data;
-      })
-      .catch(() => {
-        document.getElementById('content').innerHTML = '<p>Failed to load content.</p>';
-      });
-  }
-</script>
-
+</main>
 </body>
 </html>

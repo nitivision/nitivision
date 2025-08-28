@@ -16,4 +16,11 @@ public class NitiVisionApplication extends SpringBootServletInitializer{
 		return builder.sources(NitiVisionApplication.class);
 		
 	}
+	/*
+	 * @Bean CommandLineRunner init(UserRepository repo) { return args -> { if
+	 * (repo.findByEmail("test@niti.com").isEmpty()) { User user = new User();
+	 * user.setEmail("test@niti.com"); user.setPassword(new
+	 * BCryptPasswordEncoder().encode("secret")); repo.save(user);
+	 * System.out.println("Test user created: test@niti.com / secret"); } }; }
+	 */
 }

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+ <meta charset="UTF-8">
+  <title>Manpower Supply</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/aboutstyles.css}">
+  <link rel="stylesheet" th:href="@{/css/services.css}">
+  <link rel="stylesheet" th:href="@{/css/blog.css}">
+  <link rel="stylesheet" th:href="@{/css/manpower.css}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ✅ SEO Meta -->
+  <title>Real Estate in India | Buy, Invest, Rent & Commercial Properties - Niti Vision</title>
+  <meta name="description" content="Explore Niti Vision Real Estate: Buy property, invest in commercial spaces, rent or lease flats, and discover upcoming real estate projects in India. Expert guidance for homebuyers, investors & businesses.">
+  <meta name="keywords" content="real estate India, buy property India, invest in real estate, rent flats, commercial property, Niti Vision, property in [City], residential projects, real estate trends India">
+
+  <!-- Bootstrap & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    body { background: #f8f9fa; }
+    .hero {
+      background: url('/images/real-estate-banner.jpg') center/cover no-repeat;
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+    }
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #0d6efd;
+    }
+    .content-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .content-card:hover { transform: translateY(-5px); }
+    .blog-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: all 0.2s;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    .blog-card h5 {
+      font-weight: 600;
+      color: #0d6efd;
+    }
+    .blog-meta {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+<main layout:fragment="content">
+<!-- ✅ Hero Banner -->
+ <section class="services-header">
+    <h2 class="display-4 fw-bold">Niti Vision Real Estate</h2>
+    <p>Your trusted partner in buying, investing, renting & exploring real estate opportunities in India.</p>
+  </section>
+<!-- <section class="hero">
+  <h1 class="display-4 fw-bold">Niti Vision Real Estate</h1>
+  <p class="lead">Your trusted partner in buying, investing, renting & exploring real estate opportunities in India.</p>
+</section> -->
+
+<div class="container py-5">
+
+  <!-- 🏡 Buying Property -->
+  <section class="mb-5">
+    <h2 class="section-title"><i class="bi bi-house-door-fill me-2"></i> Buy Property in India</h2>
+    <div class="content-card">
+      <p>Whether you're a <strong>first-time homebuyer</strong> or upgrading, Niti Vision offers expert guidance on property purchase. From <em>RERA-approved projects</em> to the best residential areas in <span th:text="${city}">your city</span>, we make buying property seamless.</p>
+      <ul>
+        <li>Complete property buying guide & documentation</li>
+        <li>Best areas to buy flats in [City]</li>
+        <li>Hidden costs to watch for in property purchase</li>
+        <li>Home loan & financing assistance</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 💰 Real Estate Investment -->
+  <section class="mb-5">
+    <h2 class="section-title"><i class="bi bi-cash-coin me-2"></i> Real Estate Investment</h2>
+    <div class="content-card">
+      <p>Looking for long-term returns? Real estate is one of the safest and most profitable investments in India. Niti Vision helps you identify <strong>high ROI projects</strong> and provides expert analysis for <em>residential & commercial properties</em>.</p>
+      <ul>
+        <li>Best cities for real estate investment in 2025</li>
+        <li>Tax benefits of property investment in India</li>
+        <li>Residential vs Commercial investment insights</li>
+        <li>Emerging real estate markets in India</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 🏠 Renting & Leasing -->
+  <section class="mb-5">
+    <h2 class="section-title"><i class="bi bi-door-open-fill me-2"></i> Renting & Leasing</h2>
+    <div class="content-card">
+      <p>From finding the right <strong>rental property</strong> to drafting <strong>legally compliant rental agreements</strong>, Niti Vision supports both tenants and landlords with transparent services.</p>
+      <ul>
+        <li>Rental vs Buying cost comparison</li>
+        <li>Tenant rights and landlord obligations</li>
+        <li>Affordable flats for rent in [City]</li>
+        <li>Rental yield insights for property owners</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 🏢 Commercial Real Estate -->
+  <section class="mb-5">
+    <h2 class="section-title"><i class="bi bi-building me-2"></i> Commercial Real Estate</h2>
+    <div class="content-card">
+      <p>For businesses and investors, Niti Vision provides access to <strong>premium office spaces, coworking hubs, and retail properties</strong> across India’s top markets.</p>
+      <ul>
+        <li>Office space for rent & lease in major cities</li>
+        <li>Retail & showroom spaces in high-footfall areas</li>
+        <li>Coworking spaces for startups & freelancers</li>
+        <li>Market insights for commercial investment</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 📍 Local SEO Target -->
+  <section class="mb-5">
+    <h2 class="section-title"><i class="bi bi-geo-alt-fill me-2"></i> Real Estate in [City]</h2>
+    <div class="content-card">
+      <p>Searching for real estate opportunities in <strong><span th:text="${city}">your city</span></strong>? Niti Vision specializes in <em>local property markets</em> to help you find the best projects and communities near you.</p>
+      <ul>
+        <li>Upcoming residential projects in [City]</li>
+        <li>Affordable housing opportunities</li>
+        <li>Luxury flats & gated communities</li>
+        <li>Neighborhood & locality insights</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 🌱 Lifestyle & Trends -->
+  <section class="mb-5">
+    <h2 class="section-title"><i class="bi bi-brightness-alt-high-fill me-2"></i> Lifestyle & Real Estate Trends</h2>
+    <div class="content-card">
+      <p>The future of real estate is here. From <strong>smart homes</strong> to <strong>eco-friendly housing</strong>, Niti Vision ensures you’re ahead of the curve with the latest lifestyle and property trends.</p>
+      <ul>
+        <li>Smart home automation trends</li>
+        <li>Eco-friendly & sustainable housing</li>
+        <li>Interior design trends for 2025</li>
+        <li>Impact of remote work on real estate demand</li>
+      </ul>
+    </div>
+  </section>
+
+    <!-- 📝 Blog/Articles Section -->
+  <section class="mb-5">
+    <h2 class="section-title"><i class="bi bi-journal-text me-2"></i> Latest Real Estate Insights</h2>
+    <div class="row">
+      <!-- ✅ Auto-fetch from DB -->
+      <div class="col-md-6" th:each="blog : ${blogs}">
+        <div class="blog-card">
+          <!-- Blog Title -->
+          <h5 th:text="${blog.title}">Sample Blog Title</h5>
+
+          <!-- Meta -->
+          <p class="blog-meta">
+            <i class="bi bi-calendar3 me-1"></i> 
+            <span th:text="${#dates.format(blog.publishedDate, 'dd MMM yyyy')}">10 Aug 2025</span> 
+            | <i class="bi bi-tag me-1"></i> <span th:text="${blog.cluster}">Investment</span>
+          </p>
+
+          <!-- Excerpt -->
+          <p th:text="${blog.excerpt}">Short excerpt of blog...</p>
+
+          <!-- ✅ Read More Button -->
+          <a th:href="@{'/blog/' + ${blog.id}}" 
+             class="btn btn-outline-primary btn-sm">
+             Read More →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</div>
+
+<div class="partners-title">Our Partners</div>
+<div class="swiper mySwiperHorizontal">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><a href="https://www.flipkartcareers.com/#!/%23!" target="_blank"><img th:src="@{/images/flipcart.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://blinkit.com/careers/aboutus?srsltid=AfmBOoqlghpKNMXC3MqTVlXkKAh1gs2kWzwj-fzEo7pqRUGihiL6uqok" target="_blank"><img th:src="@{/images/blinkit.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://relianceretail.com/reliance-digital.html" target="_blank"><img th:src="@{/images/reliancedigi.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://careers.bigbasket.com/#OurJourney" target="_blank"><img th:src="@{/images/bigbasket.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://life.myntra.com/myntra-life/" target="_blank"><img th:src="@{/images/myntra.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://www.angelone.in/careers" target="_blank"><img th:src="@{/images/telecaller.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><img th:src="@{/images/hospital.jpg}" alt="" /></div>
+    <!-- Add more as needed -->
+  </div>
+  <!-- Navigation buttons -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</main>
+</body>
+</html>

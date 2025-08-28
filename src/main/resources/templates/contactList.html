@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact List</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        h1 {
+            margin: 20px 0;
+        }
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .search-box {
+            margin-bottom: 15px;
+        }
+        /* Navbar consistency */
+        .navbar {
+            background-color: #212529 !important;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" th:href="@{/admin/dashboard}">Niti Vision Admin</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/users}">Manage Users</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/admin/contactList}">Contact Messages</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/postjob}">Post a Job</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/candidates}">Candidate Profiles</a></li>
+               <!-- Profile Dropdown -->
+<!-- Profile Dropdown with Hover Tooltip -->
+<div class="dropdown" style="position: relative;">
+  <button
+    class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center"
+    type="button"
+    id="profileDropdown"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    data-bs-placement="bottom"
+    th:attr="title=${currentUser.firstName + ' ' + currentUser.lastName + ' - ' + currentUser.email}"
+    style="width: 45px; height: 45px; font-size: 18px;">
+    <span th:text="${currentUser.firstName.substring(0,1).toUpperCase()}">A</span>
+  </button>
+
+  <!-- Dropdown menu -->
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" style="min-width: 200px;">
+    <li>
+      <h6 class="dropdown-header" th:text="${currentUser.firstName + ' ' + currentUser.lastName}">John Doe</h6>
+    </li>
+    <li>
+      <span class="dropdown-item-text text-muted small" th:text="${currentUser.email}">john@example.com</span>
+    </li>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+      <a class="dropdown-item text-danger" th:href="@{/logout}">Logout</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-4">
+    <h1 class="text-center"><i class="bi bi-envelope-fill"></i> Contact Messages</h1>
+    <div class="table-container">
+        <div class="row">
+            <!-- Search box -->
+            <div class="col-md-6">
+                <div class="input-group search-box">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchBox" class="form-control" placeholder="Search by name, email, or phone...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Messages Table -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+ <thead class="table-dark">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Location</th>
+    <th>
+      <div class="d-flex justify-content-between align-items-center">
+        <span>Service</span>
+        <select id="serviceFilter" class="form-select form-select-sm ms-2" style="width:auto; min-width: 150px;">
+          <option value="">All</option>
+          <option>Consulting</option>
+          <option>Manpower Supply</option>
+          <option>HR Solutions</option>
+          <option>Web Development</option>
+          <option>Internships</option>
+          <option>Real Estate</option>
+        </select>
+      </div>
+    </th>
+    <th>Message</th>
+  </tr>
+</thead>
+
+                <tbody id="contactTable">
+                    <tr th:each="c : ${contacts}">
+                        <td th:text="${c.id}"></td>
+                        <td th:text="${c.name}"></td>
+                        <td th:text="${c.email}"></td>
+                        <td th:text="${c.phone}"></td>
+                        <td th:text="${c.location}"></td>
+                        <td th:text="${c.service}"></td>
+                        <td th:text="${c.message}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav>
+            <ul class="pagination justify-content-center" id="pagination"></ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Pagination + Search + Filter Script -->
+<script th:src="@{/js/contactList.js}"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${job.title}">Job Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <!-- Job Header -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h2 th:text="${job.title}" class="card-title"></h2>
+            <p>
+                <span class="badge bg-primary" th:text="${job.category}"></span>
+                <span class="ms-3"><i class="bi bi-geo-alt"></i> <span th:text="${job.location}"></span></span>
+                <span class="ms-3 text-muted">
+                    <i class="bi bi-calendar-event"></i>
+                    Posted <span th:text="${#temporals.format(job.postedDate, 'dd MMM yyyy')}"></span>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Job Description -->
+    <div class="mb-4">
+        <h4>Job Description</h4>
+        <p th:utext="${job.description}"></p>
+    </div>
+
+    <!-- Responsibilities -->
+    <div class="mb-4" th:if="${job.responsibilities}">
+        <h4>Responsibilities</h4>
+        <ul class="list-group">
+            <li class="list-group-item" th:each="resp : ${job.responsibilities}" th:text="${resp}"></li>
+        </ul>
+    </div>
+
+    <!-- Requirements -->
+    <div class="mb-4" th:if="${job.requirements}">
+        <h4>Requirements</h4>
+        <ul class="list-group">
+            <li class="list-group-item" th:each="req : ${job.requirements}" th:text="${req}"></li>
+        </ul>
+    </div>
+
+    <!-- Apply Button -->
+    <div class="text-center mt-4">
+        <a th:href="@{/apply/{id}(id=${job.id})}" class="btn btn-success btn-lg">Apply Now</a>
+    </div>
+
+</div>
+
+</body>
+</html>

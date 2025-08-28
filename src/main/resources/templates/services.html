@@ -1,267 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
   <meta charset="UTF-8">
-  <title>NITI Vision</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #f4a300; }
-    .logo img { height: 40px; vertical-align: middle; }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      padding: 8px 12px;
-    }
-    nav a:hover { background: black; color: white; }
-    .auth-buttons a {
-      margin-left: 10px;
-      background: black;
-      color: white;
-      text-decoration: none;
-      padding: 6px 10px;
-    }
-    .slider-container { position: relative; overflow: hidden; width: 100%; max-height: 400px; }
-    .slider { display: flex; transition: transform 0.5s ease-in-out; width: 300%; }
-    .slider img { width: 100%; height: auto; object-fit: cover; }
-    #content { padding: 20px; min-height: 200px; background: #f9f9f9; text-align: center; }
-    footer { display: flex; justify-content: space-around; background: #e6e6e6; padding: 20px; font-size: 14px; }
-    footer div { max-width: 200px; }
-    footer h4 { margin-bottom: 10px; }
-    footer a { display: block; text-decoration: none; color: #000; margin-bottom: 5px; }
-    .copyright { background: #f4a300; text-align: center; padding: 10px; font-weight: bold; }
-  </style>
+  <title>Service</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/aboutstyles.css}">
+  <link rel="stylesheet" th:href="@{/css/services.css}">
+  <link rel="stylesheet" th:href="@{/css/blog.css}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" th:href="@{/css/web-development.css}" />
 </head>
 <body>
 
-<!-- Header -->
-<header>
-  <style>
-  .logo {
-    display: flex;
-    align-items: center;
-    width: 300px; /* Increase width as needed */
-  }
 
-  .logo img {
-    height: 60px;  /* Adjust for larger size */
-    width: auto;
-    margin-right: 10px;
-  }
-
-  .logo-text {
-    font-size: 24px;
-    font-weight: bold;
-    white-space: nowrap;
-  }
-
-  .logo-text strong:first-child {
-    color: red;
-  }
-
-  .logo-text strong:last-child {
-    color: blue;
-  }
-</style>
-
-<div class="logo">
-  <img src="assets/logo.jpg" alt="Logo" />
-  <div class="logo-text">
-    <strong>NITI</strong> <strong>VISION</strong>
-  </div>
-</div>
-  <nav>
-    <a href="/home.html">HOME</a>
-    <a href="/about.html">ABOUT US</a>
-     <a href="/services.html">SERVICES</a>
-    <a href="/portfolio.html">PORTFOLIO</a>
-    <a href="/blog.html">BLOG</a>
-    <a href="/contact.html">CONTACT</a>
-  </nav>
-  <div class="auth-buttons">
-    <a href="#">SIGN UP</a>
-    <a href="#">SIGN IN</a>
-  </div>
-</header>
-
-<!-- Slider -->
-  <style>
- * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  background: #f4f4f4;
-}
-
-.slider-container {
- width: 100%;
-  overflow: hidden;
-}
-
-.slider {
-  position: relative;
-  width: 100%;
-  height: 450px;
-  overflow: hidden;
-}
-
-.slides {
-  display: flex;
-  width: 500%; /* 5 slides */
-  height: 100%;
-  animation: slideShow 25s infinite;
-}
-
-.slide {
-  flex: 0 0 100%;
-  height: 100%;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Dots */
-.dots {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.dots span {
-  width: 12px;
-  height: 12px;
-  background: #ccc;
-  border-radius: 50%;
-  display: inline-block;
-  animation: dotPulse 25s infinite;
-}
-
-.dots span:nth-child(11) { animation-delay: 0s; }
-.dots span:nth-child(22) { animation-delay: 5s; }
-.dots span:nth-child(3) { animation-delay: 10s; }
-.dots span:nth-child(4) { animation-delay: 15s; }
-.dots span:nth-child(5) { animation-delay: 20s; }
-
-@keyframes slideShow {
-  0%   { transform: translateX(0%); }
-  20%  { transform: translateX(0%); }
-  25%  { transform: translateX(-100%); }
-  45%  { transform: translateX(-100%); }
-  50%  { transform: translateX(-200%); }
-  70%  { transform: translateX(-200%); }
-  75%  { transform: translateX(-300%); }
-  95%  { transform: translateX(-300%); }
-  100% { transform: translateX(-400%); }
-}
-
-@keyframes dotPulse {
-  0%, 100% { background: #ccc; }
-  10%, 90% { background: #007bff; }
-}
-  </style>
-
-
-<div class="slider-container">
-  <div class="slider">
-  <div class="slider" id="slider">
-    <div class="slides">
-      <div class="slide"><img src="assets/slide13.jpg" alt="Slide 1"></div>
-      <div class="slide"><img src="assets/slide22.jpg" alt="Slide 2"></div>
-      <div class="slide"><img src="assets/slide3.png" alt="Slide 3"></div>
-      <div class="slide"><img src="assets/slide4.png" alt="Slide 4"></div>
-      <div class="slide"><img src="assets/slide5.png" alt="Slide 5"></div>
-    </div>
-    <div class="dots">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    </div>
-  </div>
-</div>
-
-
-
+<main layout:fragment="content">
 <!-- Dynamic Content -->
-<div id="content">
- <h2>Our Services</h2>
-<p>We offer a wide range of services to foster innovation and skill development.</p>
-<p><strong>1. Training Programs:</strong> Upskilling youth across sectors with hands-on learning.</p>
-<p><strong>2. Digital Literacy:</strong> Promoting access to digital tools and online education.</p>
-<p><strong>3. Entrepreneurship Support:</strong> Helping startups with mentoring and incubation.</p>
-<p><strong>4. Career Counseling:</strong> Guiding individuals toward the right career paths.</p>
-<p><strong>5. Industrial Collaboration:</strong> Bridging the gap between academia and industry.</p>
-<p><strong>6. E-Governance Solutions:</strong> Improving service delivery through smart technologies.</p>
-<p><strong>7. Women Empowerment:</strong> Running targeted programs for women's leadership and growth.</p>
-<p>All our services are built to empower, educate, and enable communities to thrive.</p>
-</div>
+  <div class="services-header">
+        <h2>Our <span class="brand">Services</span></h2>
+        <p>From strategy to execution, we deliver solutions that make an impact.</p>
+    </div>
 
+    <!-- Consulting -->
+    <section class="service-section">
+        <div class="service-image">
+            <img th:src="@{images/consulting.jpg}" alt="Consulting Service">
+        </div>
+        <div class="service-text">
+            <h2>Consulting</h2>
+            <p>Our consulting service helps you identify challenges, discover opportunities, and develop strategies that bring measurable success. We work hand-in-hand to shape the future of your business.</p>
+            <a href="/consulting">Read More</a>
+        </div>
+    </section>
+
+    <!-- Manpower Supply -->
+    <section class="service-section">
+        <div class="service-image">
+            <img th:src="@{images/manpower.jpg}" alt="Manpower Supply">
+        </div>
+        <div class="service-text">
+            <h2>Manpower Supply</h2>
+            <p>We connect you with highly skilled professionals to meet your short-term and long-term staffing needs. Our manpower supply ensures you get the right talent at the right time.</p>
+            <a href="/manpower">Read More</a>
+        </div>
+    </section>
+
+    <!-- HR Solutions -->
+    <section class="service-section">
+        <div class="service-image">
+            <img th:src="@{images/hrsolution.jpg}" alt="HR Solutions">
+        </div>
+        <div class="service-text">
+            <h2>HR Solutions</h2>
+            <p>From recruitment to payroll management, our HR solutions streamline your workforce management so you can focus on your core business.</p>
+            <a href="/hrsolution">Read More</a>
+        </div>
+    </section>
+
+    <!-- Web Development -->
+    <section class="service-section">
+        <div class="service-image">
+            <img th:src="@{/images/webdev.jpg}" alt="Web development team" class="img-fluid" />
+        </div>
+        <div class="service-text">
+            <h2>Web Development</h2>
+            <p>Our web development team builds responsive, high-performing websites tailored to your business goals, ensuring a seamless user experience.</p>
+            <a href="/web-development">Read More</a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-banner">
+        <h2>Ready to grow your business with us?</h2>
+        <a href="/contact">Get Started Today</a>
+    </div>
+
+<div class="partners-title">Our Partners</div>
+<div class="swiper mySwiperHorizontal">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><a href="https://www.flipkartcareers.com/#!/%23!" target="_blank"><img th:src="@{/images/flipcart.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://blinkit.com/careers/aboutus?srsltid=AfmBOoqlghpKNMXC3MqTVlXkKAh1gs2kWzwj-fzEo7pqRUGihiL6uqok" target="_blank"><img th:src="@{/images/blinkit.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://relianceretail.com/reliance-digital.html" target="_blank"><img th:src="@{/images/reliancedigi.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://careers.bigbasket.com/#OurJourney" target="_blank"><img th:src="@{/images/bigbasket.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://life.myntra.com/myntra-life/" target="_blank"><img th:src="@{/images/myntra.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://www.angelone.in/careers" target="_blank"><img th:src="@{/images/telecaller.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><img th:src="@{/images/hospital.jpg}" alt="" /></div>
+    <!-- Add more as needed -->
+  </div>
+  <!-- Navigation buttons -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-pagination"></div>
+</div>
 <!-- Footer -->
-<footer>
+<!-- <footer>
   <div>
     <h4>PROJECT NITI VISION</h4>
     To build a skilled, self-reliant workforce and boost product innovation across sectors...
   </div>
   <div>
     <h4>QUICK LINKS</h4>
-    <a href="/home.html">Home</a>
-    <a href="/about.html">About Us</a>
-    <a href="/services.html">Services</a>
-    <a href="/portfolio.html">Partfolio</a>
-    <a href="/blog.html">Blog</a>
-    <a href="/contact.html">Contact Us</a>
+    <a href="/index">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/services">Services</a>
+    <a href="/portfolio">Partfolio</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/career">Career</a>
   </div>
   <div>
     <h4>GET IN TOUCH</h4>
     Address: KASNA, Road no-1<br>
     PIN Code: 201310<br>
     Phone: 7249850707
-  </div>
-</footer>
+    
+  Social Media Links
+<div class="social-icons">
+  <a href="https://www.facebook.com/nitivisionglobal" target="_blank" title="Facebook">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
+  </a>
 
-<div class="copyright">
-  © 2024 All Rights Reserved by NITI Vision.
+  <a href="https://www.instagram.com/nitivisionglobal" target="_blank" title="Instagram">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+  </a>
+
+  <a href="https://www.linkedin.com/company/nitivisionglobal" target="_blank" title="LinkedIn">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" />
+  </a>
+
+  <a href="https://www.youtube.com/@nitivisionglobal" target="_blank" title="YouTube">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="32" height="32" />
+  </a>
+  WhatsApp Floating Button  
 </div>
+  </div>
+  <div class="whatsapp-help-container">
+  <a href="https://wa.me/+918106433217" class="whatsapp-float" target="_blank" title="Chat with us">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="" width="32" height="32" />
+  </a>
+  <div class="help-tooltip">Need Help?</div>
+</div>
+  
+</footer> -->
 
-<!-- Scripts -->
-<script>
-  // Auto slider
-  let currentSlide = 0;
-  setInterval(() => {
-    const slider = document.getElementById('slider');
-    const slides = slider.children.length;
-    currentSlide = (currentSlide + 1) % slides;
-    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-  }, 5000);
-
-  // Load dynamic content
-  function loadContent(page, event) {
-    if (event) event.preventDefault();
-    fetch('content?page=' + page)
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('content').innerHTML = data;
-      })
-      .catch(() => {
-        document.getElementById('content').innerHTML = '<p>Failed to load content.</p>';
-      });
-  }
-</script>
-
+<!-- <div class="copyright">
+  © 2025 All Rights Reserved by NITI Vision.
+</div>
+Scripts
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script th:src="@{/js/script.js}"></script> -->
+</main>
 </body>
 </html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate Profiles</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        h2 {
+            margin: 20px 0;
+            font-weight: 600;
+            color: #343a40;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .search-bar {
+            max-width: 300px;
+        }
+        .resume-link {
+            text-decoration: none;
+            color: #0d6efd;
+        }
+        .resume-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" th:href="@{/admin/dashboard}">Niti Vision Admin</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/users}">Manage Users</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/contactList}">Contact Messages</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/postjob}">Post a Job</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/admin/candidates}">Candidate Profiles</a></li>
+                <!-- Profile Dropdown -->
+<!-- Profile Dropdown with Hover Tooltip -->
+<div class="dropdown" style="position: relative;">
+  <button
+    class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center"
+    type="button"
+    id="profileDropdown"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    data-bs-placement="bottom"
+    th:attr="title=${currentUser.firstName + ' ' + currentUser.lastName + ' - ' + currentUser.email}"
+    style="width: 45px; height: 45px; font-size: 18px;">
+    <span th:text="${currentUser.firstName.substring(0,1).toUpperCase()}">A</span>
+  </button>
+
+  <!-- Dropdown menu -->
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" style="min-width: 200px;">
+    <li>
+      <h6 class="dropdown-header" th:text="${currentUser.firstName + ' ' + currentUser.lastName}">John Doe</h6>
+    </li>
+    <li>
+      <span class="dropdown-item-text text-muted small" th:text="${currentUser.email}">john@example.com</span>
+    </li>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+      <a class="dropdown-item text-danger" th:href="@{/logout}">Logout</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Candidate Profiles</h2>
+        <input type="text" id="searchInput" class="form-control search-bar" placeholder="Search candidates...">
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Job Applied</th>
+                <th>Resume</th>
+            </tr>
+            </thead>
+            <tbody id="candidateTable">
+            <tr th:each="c : ${candidates}">
+                <td th:text="${c.name}"></td>
+                <td th:text="${c.email}"></td>
+                <td th:text="${c.phone}"></td>
+                <td th:text="${c.job.title}"></td>
+                <td>
+                    <a class="resume-link" th:href="@{'/admin/uploads/' + ${c.resumePath}}" target="_blank">
+                        <i class="bi bi-file-earmark-text"></i> View Resume
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center" id="pagination"></ul>
+    </nav>
+</div>
+
+<script>
+    // 🔍 Search functionality
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#candidateTable tr");
+        rows.forEach(row => {
+            row.style.display = row.innerText.toLowerCase().includes(filter) ? "" : "none";
+        });
+    });
+
+    // 📑 Pagination (client-side)
+    document.addEventListener("DOMContentLoaded", function () {
+        let rows = document.querySelectorAll("#candidateTable tr");
+        let rowsPerPage = 5;
+        let totalPages = Math.ceil(rows.length / rowsPerPage);
+        let pagination = document.getElementById("pagination");
+
+        function showPage(page) {
+            rows.forEach((row, index) => {
+                row.style.display = (index >= (page - 1) * rowsPerPage && index < page * rowsPerPage) ? "" : "none";
+            });
+        }
+
+        function createPagination() {
+            pagination.innerHTML = "";
+            for (let i = 1; i <= totalPages; i++) {
+                let li = document.createElement("li");
+                li.className = "page-item";
+                li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                li.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    document.querySelectorAll(".page-item").forEach(el => el.classList.remove("active"));
+                    li.classList.add("active");
+                    showPage(i);
+                });
+                pagination.appendChild(li);
+            }
+            pagination.firstChild.classList.add("active");
+        }
+
+        if (rows.length > 0) {
+            createPagination();
+            showPage(1);
+        }
+    });
+</script>
+</body>
+</html>

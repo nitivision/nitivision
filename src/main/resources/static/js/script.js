@@ -26,3 +26,36 @@ var swiper = new Swiper(".mySwiperHorizontal", {
     320: { slidesPerView: 1 },
   }
 });
+
+function openModal(title, description, imageSrc) {
+	  document.getElementById('modalTitle').textContent = title;
+	  document.getElementById('modalDescription').textContent = description;
+	  document.getElementById('modalImage').src = imageSrc;
+	  document.getElementById('portfolioModal').style.display = 'flex';
+	}
+
+	function closeModal() {
+	  document.getElementById('portfolioModal').style.display = 'none';
+	}
+
+	window.onclick = function(event) {
+	  if (event.target === document.getElementById('portfolioModal')) {
+	    closeModal();
+	  }
+	}
+	
+	function showSuccessModal() {
+	    document.getElementById("successModal").style.display = "flex";
+	}
+
+	function closeSuccessModal() {
+	    document.getElementById("successModal").style.display = "none";
+	}
+
+	// If Spring sends a successMessage, show modal
+	window.onload = function() {
+	    if ("[[${successMessage}]]" !== "" && "[[${successMessage}]]" !== "null") {
+	        showSuccessModal();
+	    }
+	}
+

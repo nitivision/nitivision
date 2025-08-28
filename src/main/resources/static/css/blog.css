@@ -1,0 +1,109 @@
+.blog-header {
+    position: relative;
+    text-align: center;
+    background: url('/images/services-bg.jpg') center/cover no-repeat;
+    padding: 80px 20px;
+    color: white;
+}
+
+.blog-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* dark overlay for text visibility */
+}
+
+.blog-header .overlay {
+    position: relative;
+    z-index: 2;
+}
+
+.blog-header h2 {
+    font-size: 36px;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+}
+
+.blog-header h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: orange;
+    border-radius: 2px;
+}
+
+.blog-headerr p {
+    font-size: 18px;
+    margin-top: 15px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.blog-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px 40px;
+}
+
+.blog-post {
+    display: flex;
+    gap: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.blog-post img {
+    width: 300px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.blog-content h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.blog-content p {
+    flex: 1;
+    color: #555;
+}
+
+.blog-content a {
+    text-decoration: none;
+    color: #f4a300;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.blog-content a:hover {
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .blog-post {
+        flex-direction: column;
+    }
+
+    .blog-post img {
+        width: 100%;
+        height: auto;
+    }
+}

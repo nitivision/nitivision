@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>HR Solutions</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/aboutstyles.css}">
+  <link rel="stylesheet" th:href="@{/css/services.css}">
+  <link rel="stylesheet" th:href="@{/css/blog.css}">
+  <link rel="stylesheet" th:href="@{/css/hrsolution.css}">
+</head>
+<body>
+
+<main layout:fragment="content">
+<!-- <div id="content"> -->
+<div class="services-header">
+        <h2>Our HR <span class="brand">Solutions</span></h2>
+        <p>Streamlining Human Resource management for growing businesses.</p>
+    </div>
+    <!-- <section class="service-section">
+        <div class="service-image">
+            <img th:src="@{images/consulting.jpg}" alt="HR Service">
+        </div>
+    </section> -->
+  <!-- 🔹 About HR Solutions -->
+  <section class="hr-solution-section">
+     <div class="hr-solution-text">
+    <h2>About Our HR Solutions</h2>
+    <p>
+      At <strong>NITI Vision</strong>, we offer end-to-end HR solutions to help organizations 
+      manage their most valuable asset — people. From recruitment and onboarding to training, 
+      payroll, and compliance, our HR services are designed to make workforce management seamless and efficient.
+    </p>
+    <p>
+      Whether you are a startup building your first team or an established enterprise 
+      optimizing HR processes, our tailored solutions ensure that you stay compliant, 
+      competitive, and employee-friendly.
+    </p>
+    </div>
+    <!-- Image (Right Side) -->
+    <div class="hr-solution-image">
+      <img th:src="@{/images/HRSolutions.jpg}" alt="HR Solutions" class="img-fluid rounded shadow">
+    </div>
+  </section>
+
+  <!-- 🔹 Key Services -->
+  <section class="hr-section">
+    <h2>Our HR Services</h2>
+    <div class="hr-cards">
+      <div class="card">
+        <h4>Recruitment & Onboarding</h4>
+        <p>End-to-end hiring solutions from talent search to onboarding and integration.</p>
+      </div>
+      <div class="card">
+        <h4>Payroll & Compliance</h4>
+        <p>Accurate salary processing and adherence to labor laws and statutory compliance.</p>
+      </div>
+      <div class="card">
+        <h4>Training & Development</h4>
+        <p>Upskilling programs to enhance employee productivity and retention.</p>
+      </div>
+      <div class="card">
+        <h4>HR Policy & Strategy</h4>
+        <p>Designing HR frameworks, policies, and strategies aligned with business goals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔹 Why Choose Us -->
+  <section class="hr-section">
+    <h2>Why Choose NITI Vision HR Solutions?</h2>
+    <ul>
+      <li>✅ Expertise in multi-industry HR management</li>
+      <li>✅ Technology-driven HR processes</li>
+      <li>✅ Compliance with labor regulations and statutory norms</li>
+      <li>✅ Focus on employee satisfaction and retention</li>
+    </ul>
+  </section>
+
+  <!-- 🔹 Call to Action -->
+  <section class="hr-section text-center">
+    <h2>Transform Your HR with NITI Vision</h2>
+    <p>
+      Let us manage your HR functions while you focus on growing your business.  
+      Our HR experts are ready to assist you in building a strong workforce culture.
+    </p>
+    <a href="/contact" class="btn btn-warning btn-lg mt-3">Contact Us Today</a>
+  </section>
+<!--   </div> -->
+<div class="partners-title">Our Partners</div>
+<div class="swiper mySwiperHorizontal">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><a href="https://www.flipkartcareers.com/#!/%23!" target="_blank"><img th:src="@{/images/flipcart.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://blinkit.com/careers/aboutus?srsltid=AfmBOoqlghpKNMXC3MqTVlXkKAh1gs2kWzwj-fzEo7pqRUGihiL6uqok" target="_blank"><img th:src="@{/images/blinkit.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://relianceretail.com/reliance-digital.html" target="_blank"><img th:src="@{/images/reliancedigi.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://careers.bigbasket.com/#OurJourney" target="_blank"><img th:src="@{/images/bigbasket.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://life.myntra.com/myntra-life/" target="_blank"><img th:src="@{/images/myntra.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><a href="https://www.angelone.in/careers" target="_blank"><img th:src="@{/images/telecaller.jpg}" alt="" /></a></div>
+    <div class="swiper-slide"><img th:src="@{/images/hospital.jpg}" alt="" /></div>
+    <!-- Add more as needed -->
+  </div>
+  <!-- Navigation buttons -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-pagination"></div>
+</div>
+
+</main>
+</body>
+</html>
