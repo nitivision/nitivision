@@ -12,10 +12,7 @@ import com.niti.vision.entity.Role;
 import com.niti.vision.entity.User;
 import com.niti.vision.repository.RoleRepository;
 import com.niti.vision.repository.UserRepository;
-
-import lombok.RequiredArgsConstructor;
 @Configuration
-@RequiredArgsConstructor
 public class DataInitializer {
 	private final RoleRepository roleRepository;
     private final UserRepository userRepository;
