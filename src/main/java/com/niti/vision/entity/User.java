@@ -150,6 +150,7 @@ public class User {
         private String password;
         private boolean active;
         private LocalDateTime createdAt;
+        private LocalDateTime deactivatedAt;
         
         private Set<Role> roles = new HashSet<>();
 
@@ -181,6 +182,10 @@ public class User {
         public UserBuilder createdAt(LocalDateTime createdAt) {
             this.createdAt = createdAt;
             return this;
+        }
+        public UserBuilder deactivatedAt(LocalDateTime deactivatedAt) {
+            this.deactivatedAt = deactivatedAt;
+            return null;
         }
 		public UserBuilder roles(Set<Role> set) {
             this.roles = set;

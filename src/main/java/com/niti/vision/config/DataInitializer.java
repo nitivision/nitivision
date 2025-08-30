@@ -43,6 +43,7 @@ this.passwordEncoder = passwordEncoder;
                         .roles(Set.of(adminRole))
                         .active(true)
                         .createdAt(LocalDateTime.now())
+                        .deactivatedAt(null)
                         .build();
 
                 userRepository.save(admin);
