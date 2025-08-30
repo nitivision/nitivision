@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
          // set default role (ROLE_USER)
          Role role = roleRepository.findByName("USER")
-                 .orElseGet(() -> roleRepository.save(new Role("USER")));
+                 .orElseGet(() -> roleRepository.save(Role.builder().name("USER").build()));
          user.getRoles().add(role);
 
          // default user is inactive until approved by admin

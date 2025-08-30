@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- Console appender (always enabled for framework logs) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ========= DEV PROFILE ========= -->
+    <springProfile name="dev">
+        <appender name="FILE-DEV" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>logs/nitivision.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>logs/nitivision.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>7</maxHistory> <!-- keep 7 days in dev -->
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <!-- Framework logs -> console -->
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+
+        <!-- Your app logs -> dev file -->
+        <logger name="com.niti.vision" level="DEBUG" additivity="false">
+            <appender-ref ref="FILE-DEV"/>
+        </logger>
+    </springProfile>
+
+    <!-- ========= PROD PROFILE ========= -->
+    <springProfile name="prod">
+        <appender name="FILE-PROD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/var/log/nitivision/nitivision.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/var/log/nitivision/nitivision.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>30</maxHistory> <!-- keep 30 days in prod -->
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <!-- Framework logs -> console -->
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+
+        <!-- Your app logs -> prod file -->
+        <logger name="com.niti.vision" level="INFO" additivity="false">
+            <appender-ref ref="FILE-PROD"/>
+        </logger>
+    </springProfile>
+
+</configuration>

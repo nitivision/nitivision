@@ -1,10 +1,15 @@
 package com.niti.vision.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -19,7 +24,13 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
 
-    public Role() {
+ // ---------- Constructors ----------
+    public Role() {}
+
+    private Role(RoleBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.users = builder.users;
     }
     
     // ✅ Convenience constructor
@@ -51,5 +62,31 @@ public class Role {
 		this.users = users;
 	}
     
-    
+	// ---------- Builder ----------
+    public static class RoleBuilder {
+        private Long id;
+        private String name;
+        private Set<User> users = new HashSet<>();
+
+        public RoleBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+        public RoleBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+        public RoleBuilder users(Set<User> users) {
+            this.users = users;
+            return this;
+        }
+
+        public Role build() {
+            return new Role(this);
+        }
+    }
+
+    public static RoleBuilder builder() {
+        return new RoleBuilder();
+    }
 }

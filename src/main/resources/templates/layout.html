@@ -4,24 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/png" th:href="@{/images/logo1.svg}">
-  <title >NITI Vision</title>
+  <title>NITI Vision</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
   <!-- Bootstrap & Swiper -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" th:href="@{/css/styles.css}">
-  <link rel="stylesheet" th:href="@{/css/aboutstyles.css}">
-  <link rel="stylesheet" th:href="@{/css/services.css}">
-  <link rel="stylesheet" th:href="@{/css/blog.css}">
-  <link rel="stylesheet" th:href="@{/css/blog.css}">
- <!--  <link rel="stylesheet" th:href="@{/css/desktopmobileview.css}"> -->
+  <link rel="stylesheet" th:href="@{/css/desktopmobileview.css}">
   
-
-  <style>
-    .modal-header { background-color: #004d4d; color: white; }
-    .form-control, .form-select { margin-bottom: 10px; }
-  </style>
 </head>
 <body>
 
@@ -29,9 +21,11 @@
 <header>
   <div class="logo">
     <img th:src="@{/images/logo1.svg}" alt="Logo" width="200"/>
-    <div class="logo-text"><strong>NITIVISION</strong></div>
+    <div class="logo-text">NITIVISION</div>
   </div>
-  <nav>
+
+  <!-- Desktop Menu -->
+  <nav class="desktop-menu">
     <a href="/index">HOME</a>
     <a href="/about">ABOUT US</a>
     <div class="dropdown">
@@ -50,29 +44,43 @@
     <a href="/contact">CONTACT</a>
     <a href="/career">CAREER</a>
   </nav>
+
+  <!-- Hamburger -->
   <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
 
-  <!-- Slide-in Side Menu -->
+  <!-- Desktop Side Menu -->
   <div id="sideMenu" class="side-menu">
     <p><strong>Hello, Welcome to Niti Vision</strong></p>
     <p>Search Services, Portfolios & More</p>
     <button class="login-btn" onclick="location.href='/login'">Login/Register</button>
     <a href="/forgot-password">Forgot Password?</a>
   </div>
+</header>
 
-  <!-- 🔹 Mobile Side Menu -->
-  <div id="sideMenu" class="side-menu">
-    <p><strong>Hello, Welcome to Niti Vision</strong></p>
-    <p>Search Services, Portfolios & More</p>
-    <div class="auth-box">
-      <button class="login-btn" onclick="location.href='/login'">Login</button>
-      <button class="register-btn" onclick="location.href='/register'">Register</button>
-      <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
+<!-- 🔹 Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu">
+  <a href="/index">HOME</a>
+  <a href="/about">ABOUT US</a>
+
+  <div class="mobile-dropdown">
+    <button onclick="toggleDropdown(this)">
+      SERVICES <span class="arrow">▾</span>
+    </button>
+    <div class="mobile-dropdown-content">
+      <a href="/consulting">Consulting</a>
+      <a href="/manpower">Manpower Supply</a>
+      <a href="/hrsolution">HR Solutions</a>
+      <a href="/web-development">Web Development</a>
+      <a href="/internship">Internships</a>
+      <a href="/realestate">Real Estate</a>
     </div>
   </div>
-  
-  
-</header>
+
+  <a href="/portfolio">PORTFOLIO</a>
+  <a href="/blog">BLOG</a>
+  <a href="/contact">CONTACT</a>
+  <a href="/career">CAREER</a>
+</div>
 
 <!-- 🔹 Dynamic Page Content -->
 <main layout:fragment="content"></main>
@@ -146,8 +154,10 @@
             <option>Real Estate</option>
           </select>
           <textarea name="message" class="form-control" placeholder="Message" rows="3" required></textarea>
-          <!-- Google reCAPTCHA -->
+          <!-- Google reCAPTCHA Dev -->
           <div class="g-recaptcha" data-sitekey="6LcGzq0rAAAAAMG4cv7oq69qCE6ZWtqvOHllzLvS"></div>
+          <!-- Google reCAPTCHA for prod-->
+          <!-- <div class="g-recaptcha" data-sitekey="6LcnBLgrAAAAAPSJ48eqUP46JEYWNeZFxhcmKfOz"></div> -->
           <button type="submit" class="btn btn-primary w-100 mt-3">Submit</button>
         </form>
       </div>
@@ -158,56 +168,8 @@
 <!-- 🔹 Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script th:src="@{/js/script.js}"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<!-- <script th:src="@{/js/desktopmobileview.js}"></script> -->
+<script th:src="@{/js/desktopmobileview.js}"></script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  let formSubmitted = false;
-  const contactModal = new bootstrap.Modal(document.getElementById('contactModal'));
-
-  // Show popup every 10s until submitted
-  const interval = setInterval(() => {
-    if (!formSubmitted) {
-      contactModal.show();
-    } else {
-      clearInterval(interval);
-    }
-  }, 1000000);
-
-  // Submit handler
-  document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const recaptchaResponse = grecaptcha.getResponse();
-    if (recaptchaResponse.length === 0) {
-      alert("Please verify that you are not a robot.");
-      return;
-    }
-    const data = {
-      name: this.name.value,
-      email: this.email.value,
-      phone: this.phone.value,
-      location: this.location.value,
-      service: this.service.value,
-      message: this.message.value
-    };
-
-    fetch('/savepopup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(r => {
-      if (r.ok) {
-        alert('Thanks! Your response has been saved.');
-        formSubmitted = true;
-        contactModal.hide();
-      } else {
-        alert('Error submitting form.');
-      }
-    });
-  });
-});
-</script>
 </body>
 </html>

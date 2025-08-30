@@ -8,6 +8,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +43,18 @@ import jakarta.validation.Valid;
 @Controller
 @CrossOrigin(origins = "*")
 public class MainController {
-
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	
 	private ContactMessageRepository repository;
 	private UserService userService;
 	private JobRepository jobRepo;
 	private CandidateRepository candidateRepo;
+	//Dev
 	private static final String SECRET_KEY = "6LcGzq0rAAAAAKKnrXW4yA_IhteVWsuvNaLIAGE6";
     private static final String VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+    //Prod
+    //private static final String SECRET_KEY = "6LcnBLgrAAAAAE_QLlm1EcW6G12DDmaOvSIZ4vR5";
+    //private static final String VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 	@Autowired
 	public MainController(UserService userService, ContactMessageRepository repository, JobRepository jobRepo,
 			CandidateRepository candidateRepo) {
@@ -59,9 +66,11 @@ public class MainController {
 
 	@PostMapping("/contact/save")
 	public String saveContact(@ModelAttribute ContactMessage message, RedirectAttributes redirectAttributes) {
+		logger.info("Start saveContact Method");
 		repository.save(message);
 		redirectAttributes.addFlashAttribute("successMessage",
 				"Form submitted successfully. We’ll get back to you as soon as possible!");
+		logger.info("End saveContact Method");
 		return "redirect:/contact"; // redirect to list page
 	}
 
@@ -74,51 +83,61 @@ public class MainController {
 
 	@GetMapping({ "/", "/index" })
 	public String home() {
+		logger.info("Home page");
 		return "index";
 	}
 
 	@GetMapping({ "/about" })
 	public String about() {
+		logger.info("About Us page");
 		return "about";
 	}
 
 	@GetMapping({ "/blog" })
 	public String blog() {
+		logger.info("Blog page");
 		return "blog";
 	}
 
 	@GetMapping({ "/contact" })
 	public String contact() {
+		logger.info("Contact Us page");
 		return "contact";
 	}
 
 	@GetMapping({ "/portfolio" })
 	public String portfolio() {
+		logger.info("Portfolio page");
 		return "portfolio";
 	}
 
 	@GetMapping({ "/services" })
 	public String services() {
+		logger.info("Service page");
 		return "services";
 	}
 
 	@GetMapping({ "/consulting" })
 	public String consulting() {
+		logger.info("Consulting page");
 		return "consulting";
 	}
 
 	@GetMapping({ "/manpower" })
 	public String manpower() {
+		logger.info("Manpower page");
 		return "manpower";
 	}
 
 	@GetMapping({ "/hrsolution" })
 	public String hrsolution() {
+		logger.info("HR Solution page");
 		return "hrsolution";
 	}
 
 	@GetMapping({ "/career" })
 	public String career(Model model) {
+		logger.info("Career page");
 		model.addAttribute("jobs", jobRepo.findAll());
 		return "career";
 	}
