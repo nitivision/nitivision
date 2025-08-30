@@ -32,7 +32,7 @@
         <h2>Drop us a line</h2>
         <p>We’ll get back to you as soon as possible.</p>
 
-        <form th:action="@{/contact/save}" method="post" th:object="${contactMessage}">
+        <form id="contactForm" th:action="@{/contact/save}" method="post" th:object="${contactMessage}">
           <div class="form-row">
             <input type="text" name="name" placeholder="Name *" required>
             <input type="email" name="email" placeholder="Email *" required>
@@ -56,7 +56,10 @@
           </div>
 
           <textarea name="message" placeholder="Message"></textarea>
-
+          <!-- Google reCAPTCHA for Dev-->
+          <div class="g-recaptcha" data-sitekey="6LcGzq0rAAAAAMG4cv7oq69qCE6ZWtqvOHllzLvS"></div>
+          <!-- Google reCAPTCHA for prod-->
+          <!-- <div class="g-recaptcha" data-sitekey="6LcnBLgrAAAAAPSJ48eqUP46JEYWNeZFxhcmKfOz"></div> -->
           <button type="submit" class="btn-submit">Submit</button>
         </form>
       </div>
@@ -115,5 +118,63 @@
 </div>
 
 </main>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+  let isValid = true;
+  let messages = [];
+
+  // Name validation
+  let name = document.querySelector("input[name='name']").value.trim();
+  if (name.length < 3) {
+    isValid = false;
+    messages.push("Name must be at least 3 characters.");
+  }
+
+  // Email validation
+  let email = document.querySelector("input[name='email']").value.trim();
+  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    isValid = false;
+    messages.push("Please enter a valid email address.");
+  }
+
+  // Location validation
+  let location = document.querySelector("input[name='location']").value.trim();
+  if (location === "") {
+    isValid = false;
+    messages.push("Location is required.");
+  }
+
+  // Phone validation (10 digits for India)
+  let phone = document.querySelector("input[name='phone']").value.trim();
+  let phonePattern = /^[0-9]{10}$/;
+  if (!phonePattern.test(phone)) {
+    isValid = false;
+    messages.push("Phone number must be 10 digits.");
+  }
+
+  // Service dropdown validation
+  let service = document.querySelector("select[name='service']").value;
+  if (service === "") {
+    isValid = false;
+    messages.push("Please select a service.");
+  }
+
+  // reCAPTCHA validation
+  let recaptchaResponse = grecaptcha.getResponse();
+  if (recaptchaResponse.length === 0) {
+    isValid = false;
+    messages.push("Please verify that you are not a robot.");
+  }
+
+  // If validation fails
+  if (!isValid) {
+    alert(messages.join("\n"));
+    event.preventDefault();
+  }
+});
+</script>
+
 </body>
 </html>

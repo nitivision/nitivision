@@ -1,11 +1,20 @@
 package com.niti.vision.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
@@ -37,7 +46,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String otp;
     @Column(nullable = false)
     private Long otpGeneratedAt;
@@ -45,7 +54,17 @@ public class User {
     private LocalDateTime deactivatedAt;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-    public User() {
+ // ---------- Constructors ----------
+    public User() {}
+
+    private User(UserBuilder builder) {
+        this.id = builder.id;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.email = builder.email;
+        this.password = builder.password;
+        this.active = builder.active;
+        this.roles = builder.roles;
     }
     
 	public Long getId() {
@@ -121,6 +140,51 @@ public class User {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+	// ---------- Builder ----------
+    public static class UserBuilder {
+        private Long id;
+        private String firstName;
+        private String lastName;
+        private String email;
+        private String password;
+        private boolean active;
+        private Set<Role> roles = new HashSet<>();
 
-	
+        public UserBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+        public UserBuilder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+        public UserBuilder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+        public UserBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+        public UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+        public UserBuilder active(boolean active) {
+            this.active = active;
+            return this;
+        }
+        public UserBuilder roles(Set<Role> set) {
+            this.roles = set;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
+    }
+
+    public static UserBuilder builder() {
+        return new UserBuilder();
+    }
 }
