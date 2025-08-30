@@ -2,6 +2,7 @@ package com.niti.vision.config;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ public class DataInitializer {
 	private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     public DataInitializer(UserRepository userRepository,
             RoleRepository roleRepository,
             PasswordEncoder passwordEncoder
