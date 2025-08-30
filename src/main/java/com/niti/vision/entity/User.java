@@ -48,9 +48,9 @@ public class User {
     private Set<Role> roles = new HashSet<>();
     @Column(nullable = true)
     private String otp;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long otpGeneratedAt;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDateTime deactivatedAt;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
