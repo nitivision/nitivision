@@ -185,7 +185,7 @@ public class User {
         }
         public UserBuilder deactivatedAt(LocalDateTime deactivatedAt) {
             this.deactivatedAt = deactivatedAt;
-            return null;
+            return this;
         }
 		public UserBuilder roles(Set<Role> set) {
             this.roles = set;
