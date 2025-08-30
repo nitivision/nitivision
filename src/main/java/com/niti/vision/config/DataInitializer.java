@@ -1,4 +1,5 @@
 package com.niti.vision.config;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
@@ -42,6 +43,7 @@ this.passwordEncoder = passwordEncoder;
                         .password(passwordEncoder.encode("Trinity@123"))
                         .roles(Set.of(adminRole))
                         .active(true)
+                        .createdAt(LocalDateTime.now())
                         .build();
 
                 userRepository.save(admin);

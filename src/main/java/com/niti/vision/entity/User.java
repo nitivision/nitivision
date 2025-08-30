@@ -65,6 +65,7 @@ public class User {
         this.password = builder.password;
         this.active = builder.active;
         this.roles = builder.roles;
+        this.createdAt=builder.createdAt;
     }
     
 	public Long getId() {
@@ -148,6 +149,8 @@ public class User {
         private String email;
         private String password;
         private boolean active;
+        private LocalDateTime createdAt;
+        
         private Set<Role> roles = new HashSet<>();
 
         public UserBuilder id(Long id) {
@@ -174,7 +177,12 @@ public class User {
             this.active = active;
             return this;
         }
-        public UserBuilder roles(Set<Role> set) {
+        
+        public UserBuilder createdAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+		public UserBuilder roles(Set<Role> set) {
             this.roles = set;
             return this;
         }
