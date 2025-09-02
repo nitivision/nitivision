@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Compose Email</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .compose-box {
+      width: 600px;
+      background: #fff;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .compose-header {
+      padding: 8px 12px;
+      border-bottom: 1px solid #dadce0;
+      font-weight: bold;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f1f3f4;
+      cursor: move;
+      user-select: none;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .header-btn {
+      cursor: pointer;
+      font-size: 14px;
+      color: #5f6368;
+    }
+
+    .compose-body {
+      padding: 8px 12px;
+      flex: 1;
+    }
+
+    .compose-body input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #dadce0;
+      padding: 8px 0;
+      font-size: 14px;
+      outline: none;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      border-bottom: 1px solid #dadce0;
+      padding: 6px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .toolbar button, .toolbar select {
+      border: 1px solid #dadce0;
+      background: white;
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .color-picker {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .color-box {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #dadce0;
+      cursor: pointer;
+    }
+
+    .compose-body #editor {
+      width: 100%;
+      border: 1px solid #dadce0;
+      resize: none;
+      outline: none;
+      margin-top: 10px;
+      font-size: 14px;
+      min-height: 200px;
+      padding: 8px;
+      border-radius: 4px;
+    }
+
+    .compose-footer {
+      padding: 8px 12px;
+      border-top: 1px solid #dadce0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .send-btn {
+      background: #1a73e8;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .send-btn:hover {
+      background: #1669c1;
+    }
+
+    .attach-btn {
+      background: none;
+      border: none;
+      color: #1a73e8;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    /* Hide real input */
+    #attachments { display: none; }
+    #fileList { font-size: 12px; color: #5f6368; margin-top: 5px; }
+    .file-item { display: inline-block; background: #f1f3f4; padding: 3px 8px; margin: 2px; border-radius: 12px; }
+    .file-remove { margin-left: 6px; color: red; cursor: pointer; font-weight: bold; }
+
+    .drop-area {
+      border: 2px dashed #dadce0;
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #5f6368;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .drop-area.dragover { border-color: #1a73e8; background: #f1f8ff; color: #1a73e8; }
+
+    #ccRow, #bccRow { display: none; }
+    .inline-links { position: absolute; right: 10px; top: 12px; font-size: 12px; }
+    .inline-links span { color: #1a73e8; cursor: pointer; margin-left: 8px; }
+
+    #confirmationToast {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #323232;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 9999;
+    }
+    #okBtn {
+      background: #1a73e8;
+      border: none;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .minimized { height: 40px !important; width: 300px !important; overflow: hidden; }
+    .minimized .compose-body, .minimized .compose-footer { display: none; }
+    .maximized { width: 100% !important; height: 100% !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; border-radius: 0 !important; }
+  </style>
+</head>
+<body>
+  <div class="compose-box" id="composeBox">
+    <div class="compose-header" id="composeHeader">
+      <span>New Message</span>
+      <div class="header-actions">
+        <span id="minimizeBtn" class="header-btn">—</span>
+        <span id="maximizeBtn" class="header-btn">☐</span>
+        <span id="closeBtn" class="header-btn">&times;</span>
+      </div>
+    </div>
+
+    <form id="contactForm" enctype="multipart/form-data">
+      <div class="compose-body" style="position:relative;">
+        <input type="email" id="to" name="to" placeholder="To" required>
+        <div class="inline-links">
+          <span id="ccLink">Cc</span>
+          <span id="bccLink">Bcc</span>
+        </div>
+
+        <div id="ccRow"><input type="text" id="cc" name="cc" placeholder="Cc"></div>
+        <div id="bccRow"><input type="text" id="bcc" name="bcc" placeholder="Bcc"></div>
+
+        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <button type="button" onclick="formatText('undo')">↶</button>
+          <button type="button" onclick="formatText('redo')">↷</button>
+
+          <select onchange="formatText('fontName', this.value)">
+            <option>Sans Serif</option>
+            <option>Serif</option>
+            <option>Fixed Width</option>
+            <option>Wide</option>
+            <option>Narrow</option>
+            <option>Comic Sans MS</option>
+            <option>Garamond</option>
+            <option>Georgia</option>
+            <option>Tahoma</option>
+            <option>Trebuchet MS</option>
+            <option>Verdana</option>
+          </select>
+
+          <select onchange="formatText('fontSize', this.value)">
+            <option value="1">Smallest</option>
+            <option value="2">Small</option>
+            <option value="3" selected>Normal</option>
+            <option value="4">Medium</option>
+            <option value="5">Large</option>
+            <option value="6">Larger</option>
+            <option value="7">Huge</option>
+          </select>
+
+          <button type="button" onclick="formatText('bold')"><b>B</b></button>
+          <button type="button" onclick="formatText('italic')"><i>I</i></button>
+          <button type="button" onclick="formatText('underline')"><u>U</u></button>
+
+          <div class="color-picker">
+            <input type="color" onchange="formatText('backColor', this.value)" title="Background color">
+            <input type="color" onchange="formatText('foreColor', this.value)" title="Text color">
+          </div>
+
+          <button type="button" onclick="formatText('insertUnorderedList')">• List</button>
+          <button type="button" onclick="formatText('insertOrderedList')">1. List</button>
+
+          <button type="button" onclick="formatText('justifyLeft')">⯇</button>
+          <button type="button" onclick="formatText('justifyCenter')">≡</button>
+          <button type="button" onclick="formatText('justifyRight')">⯈</button>
+          <button type="button" onclick="formatText('justifyFull')">☰</button>
+
+          <button type="button" onclick="removeFormatting()">Tx</button>
+        </div>
+
+        <!-- Rich Text Editor -->
+        <div id="editor" contenteditable="true"></div>
+
+        <input type="file" id="attachments" name="attachments" multiple>
+        <div id="dropArea" class="drop-area">Drag & Drop files here or click "Attach"</div>
+      </div>
+
+      <div class="compose-footer">
+        <button type="submit" class="send-btn">Send</button>
+        <button type="button" class="attach-btn" onclick="document.getElementById('attachments').click()">Attach</button>
+        <div id="fileList"></div>
+      </div>
+    </form>
+  </div>
+
+  <div id="confirmationToast">
+    <span>Email sent successfully ✔</span>
+    <button id="okBtn">OK</button>
+  </div>
+
+  <script>
+    const composeBox = document.getElementById("composeBox");
+    const minimizeBtn = document.getElementById("minimizeBtn");
+    const maximizeBtn = document.getElementById("maximizeBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const fileInput = document.getElementById("attachments");
+    const fileList = document.getElementById("fileList");
+    const dropArea = document.getElementById("dropArea");
+    const toast = document.getElementById("confirmationToast");
+    const okBtn = document.getElementById("okBtn");
+    let selectedFiles = [];
+
+    minimizeBtn.onclick = () => { composeBox.classList.toggle("minimized"); };
+    maximizeBtn.onclick = () => { composeBox.classList.toggle("maximized"); };
+   /*  closeBtn.onclick = () => { composeBox.style.display = "none"; }; */
+closeBtn.onclick = () => {
+    document.getElementById("composeContainer").style.display = "none";
+    document.getElementById("composeContainer").innerHTML = "";
+};
+    document.getElementById("ccLink").onclick = () => { document.getElementById("ccRow").style.display = "block"; };
+    document.getElementById("bccLink").onclick = () => { document.getElementById("bccRow").style.display = "block"; };
+
+    fileInput.onchange = () => { selectedFiles = [...selectedFiles, ...Array.from(fileInput.files)]; renderFileList(); fileInput.value=""; };
+    dropArea.ondragover = e => { e.preventDefault(); dropArea.classList.add("dragover"); };
+    dropArea.ondragleave = () => dropArea.classList.remove("dragover");
+    dropArea.ondrop = e => { e.preventDefault(); dropArea.classList.remove("dragover"); selectedFiles = [...selectedFiles, ...Array.from(e.dataTransfer.files)]; renderFileList(); };
+
+    function renderFileList() {
+      fileList.innerHTML = "";
+      selectedFiles.forEach((file, i) => {
+        const span = document.createElement("span");
+        span.className = "file-item";
+        span.textContent = file.name;
+        const remove = document.createElement("span");
+        remove.textContent = "×";
+        remove.className = "file-remove";
+        remove.onclick = () => { selectedFiles.splice(i,1); renderFileList(); };
+        span.appendChild(remove);
+        fileList.appendChild(span);
+      });
+    }
+
+    function formatText(cmd, val=null) {
+      document.execCommand(cmd, false, val);
+    }
+    function removeFormatting() {
+      document.execCommand("removeFormat", false, null);
+      document.execCommand("unlink", false, null); // remove links
+    }
+
+    document.getElementById("contactForm").onsubmit = e => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("to", document.getElementById("to").value);
+      formData.append("cc", document.getElementById("cc").value);
+      formData.append("bcc", document.getElementById("bcc").value);
+      formData.append("subject", document.getElementById("subject").value);
+      formData.append("message", document.getElementById("editor").innerHTML);
+      selectedFiles.forEach(f => formData.append("attachments", f));
+
+      fetch("/admin/send-email", { method: "POST", body: formData })
+        .then(r=>r.json()).then(()=>{ 
+          document.getElementById("contactForm").reset();
+          document.getElementById("editor").innerHTML="";
+          selectedFiles=[]; renderFileList();
+          toast.style.display="block";
+        }).catch(()=>alert("Error sending message"));
+    };
+
+    okBtn.onclick = () => toast.style.display="none";
+  </script>
+</body>
+</html>

@@ -13,7 +13,8 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" th:href="@{/css/desktopmobileview.css}">
-  
+   <link rel="stylesheet" th:href="@{/css/swaper.css}">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
 
@@ -80,11 +81,66 @@
   <a href="/blog">BLOG</a>
   <a href="/contact">CONTACT</a>
   <a href="/career">CAREER</a>
+ <hr>
+<div class="auth-section">
+  <a href="/login" class="auth-link">
+    <i class="fas fa-user-circle"></i> Login / Register
+  </a>
+  <a href="/forgot-password" class="forgot-link">
+    Forgot Password?
+  </a>
+</div>
+
 </div>
 
 <!-- 🔹 Dynamic Page Content -->
 <main layout:fragment="content"></main>
+<!-- 🔹 Partners -->
+<div class="partners-title">Our Partners</div>
+<div class="swiper mySwiperHorizontal">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <a href="https://www.flipkartcareers.com/" target="_blank">
+        <img th:src="@{/images/flipcart.jpg}" alt="Flipkart Careers" />
+      </a>
+    </div>
+    <div class="swiper-slide">
+      <a href="https://blinkit.com/careers/" target="_blank">
+        <img th:src="@{/images/blinkit.jpg}" alt="Blinkit Careers" />
+      </a>
+    </div>
+    <div class="swiper-slide">
+      <a href="https://relianceretail.com/" target="_blank">
+        <img th:src="@{/images/reliancedigi.jpg}" alt="Reliance Retail" />
+      </a>
+    </div>
+    <div class="swiper-slide">
+      <a href="https://careers.bigbasket.com/" target="_blank">
+        <img th:src="@{/images/bigbasket.jpg}" alt="BigBasket Careers" />
+      </a>
+    </div>
+    <div class="swiper-slide">
+      <a href="https://life.myntra.com/" target="_blank">
+        <img th:src="@{/images/myntra.jpg}" alt="Myntra Careers" />
+      </a>
+    </div>
+    <div class="swiper-slide">
+      <a href="https://www.angelone.in/careers" target="_blank">
+        <img th:src="@{/images/telecaller.jpg}" alt="AngelOne Careers" />
+      </a>
+    </div>
+    <div class="swiper-slide">
+      <img th:src="@{/images/hospital.jpg}" alt="Hospital Partner" />
+    </div>
+  </div>
 
+  <!-- Navigation buttons -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+
+  <!-- Pagination dots -->
+  <div class="swiper-pagination"></div>
+</div>
 <!-- 🔹 Footer -->
 <footer>
   <div>
@@ -170,6 +226,34 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script th:src="@{/js/desktopmobileview.js}"></script>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Swiper Initialization -->
+<script>
+  var swiper = new Swiper(".mySwiperHorizontal", {
+    slidesPerView: 3,       // show 3 logos at a time
+    spaceBetween: 20,       // space between logos
+    loop: true,             // infinite loop
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      320: { slidesPerView: 2, spaceBetween: 10 },  // Mobile
+      768: { slidesPerView: 3, spaceBetween: 20 },  // Tablet
+      1024: { slidesPerView: 5, spaceBetween: 30 }, // Desktop
+    },
+  });
+</script>
 
 </body>
 </html>
