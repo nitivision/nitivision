@@ -28,7 +28,7 @@ public class EmailService {
     	System.out.println("Start Service sendEmail method");
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-
+        helper.setFrom("nitivisionglobal@gmail.com");
         helper.setTo(to);
 
         if (cc != null && !cc.isEmpty()) {

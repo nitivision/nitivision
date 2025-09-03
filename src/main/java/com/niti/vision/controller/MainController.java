@@ -50,11 +50,11 @@ public class MainController {
 	private JobRepository jobRepo;
 	private CandidateRepository candidateRepo;
 	//Dev
-	//private static final String SECRET_KEY = "6LcGzq0rAAAAAKKnrXW4yA_IhteVWsuvNaLIAGE6";
-    //private static final String VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
-    //Prod
-    private static final String SECRET_KEY = "6LcnBLgrAAAAAE_QLlm1EcW6G12DDmaOvSIZ4vR5";
+	private static final String SECRET_KEY = "6LcGzq0rAAAAAKKnrXW4yA_IhteVWsuvNaLIAGE6";
     private static final String VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+    //Prod
+    //private static final String SECRET_KEY = "6LcnBLgrAAAAAE_QLlm1EcW6G12DDmaOvSIZ4vR5";
+    //private static final String VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 	@Autowired
 	public MainController(UserService userService, ContactMessageRepository repository, JobRepository jobRepo,
 			CandidateRepository candidateRepo) {
