@@ -51,7 +51,7 @@ public class EmailService {
                 }
             }
         }
-        System.out.println("END Controller sendEmail method");
+        System.out.println("END Service sendEmail method");
         mailSender.send(mimeMessage);
     }
 }
