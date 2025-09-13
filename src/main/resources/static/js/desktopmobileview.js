@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       clearInterval(interval);
     }
-  }, 10000);
+  }, 20000);
 
   // Form submission
   document.getElementById('contactForm').addEventListener('submit', function (e) {

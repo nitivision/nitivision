@@ -66,3 +66,51 @@
       color: #004d4d;
       margin-bottom: 10px;
     }
+    
+    /* ===================
+   Mobile View Fixes
+=================== */
+@media (max-width: 768px) {
+  /* Stack image & text */
+  .manpower-section-main {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .split-left {
+    order: 1;
+  }
+  .split-right {
+    order: 2;
+    margin-top: 20px;
+  }
+
+  /* Hero padding */
+  .manpower-hero {
+    padding: 50px 15px;
+    font-size: 14px;
+  }
+
+  /* Headings */
+  .manpower-section h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  /* Cards - one per row on mobile */
+  .manpower-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .card {
+    padding: 15px;
+    text-align: center;
+  }
+
+  /* Lists */
+  .manpower-section ul {
+    padding-left: 20px;
+    text-align: left;
+  }
+}

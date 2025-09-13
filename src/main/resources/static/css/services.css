@@ -1,21 +1,11 @@
-
-style>body {
-	font-family: Arial, sans-serif;
-	background: #f4f4f4;
-	margin: 0;
-}
-.web-services-header {
-    position: relative;
-    text-align: center;
-    background: url('/images/services-bg.jpg') center/cover no-repeat;
-    padding: 80px 20px;
-    color: white;
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
 }
 
-.web-services-header .container {
-    position: relative;
-    z-index: 2;
-}
+/* ---------- Services Header ---------- */
+.web-services-header,
 .services-header {
     position: relative;
     text-align: center;
@@ -31,7 +21,7 @@ style>body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4); /* dark overlay for text visibility */
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .services-header .overlay {
@@ -66,92 +56,116 @@ style>body {
     margin-right: auto;
 }
 
+/* ---------- Service Section ---------- */
 .service-section {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 50px 20px;
-	max-width: 1200px;
-	margin: auto;
-	gap: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: auto;
+    gap: 40px;
 }
 
 .service-section:nth-child(even) {
-	flex-direction: row-reverse;
-	background: white;
+    flex-direction: row-reverse; /* alternate on desktop */
+    background: #fff;
 }
 
 .service-section:nth-child(odd) {
-	background: #f9f9f9;
+    background: #f9f9f9;
 }
 
 .service-text {
-	flex: 1;
+    flex: 1;
 }
 
 .service-text h2 {
-	margin-bottom: 15px;
-	font-size: 2rem;
-	color: #333;
+    margin-bottom: 15px;
+    font-size: 2rem;
+    color: #333;
 }
 
 .service-text p {
-	font-size: 1.1rem;
-	line-height: 1.6;
-	color: #555;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
 }
 
 .service-text a {
-	display: inline-block;
-	margin-top: 15px;
-	background: orange;
-	color: white;
-	padding: 10px 20px;
-	text-decoration: none;
-	border-radius: 5px;
-	font-weight: bold;
+    display: inline-block;
+    margin-top: 15px;
+    background: orange;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
 }
 
 .service-text a:hover {
-	background: #cc7a00;
+    background: #cc7a00;
 }
 
 .service-image {
-	flex: 1;
+    flex: 1;
+    text-align: center;
 }
 
 .service-image img {
-	width: 100%;
-	border-radius: 10px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* CTA Banner */
+/* ---------- CTA Banner ---------- */
 .cta-banner {
-	background: orange;
-	color: white;
-	text-align: center;
-	padding: 40px 20px;
+    background: orange;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
 }
 
 .cta-banner h2 {
-	font-size: 2rem;
+    font-size: 2rem;
 }
 
 .cta-banner a {
-	display: inline-block;
-	margin-top: 15px;
-	background: black;
-	color: white;
-	padding: 10px 25px;
-	text-decoration: none;
-	border-radius: 5px;
-	font-weight: bold;
+    display: inline-block;
+    margin-top: 15px;
+    background: black;
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
 }
 
 .cta-banner a:hover {
-	background: #222;
+    background: #222;
 }
-</
-style
->
+
+/* ---------- Responsive Fix ---------- */
+@media (max-width: 900px) {
+    .service-section,
+    .service-section:nth-child(even) {
+        flex-direction: column; /* always stack image first then text */
+        text-align: center;
+        padding: 30px 15px;
+        gap: 20px;
+    }
+
+    .service-text h2 {
+        font-size: 1.6rem;
+    }
+
+    .service-text p {
+        font-size: 1rem;
+    }
+
+    .service-text a {
+        padding: 8px 16px;
+    }
+}

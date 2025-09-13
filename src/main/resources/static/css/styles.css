@@ -326,3 +326,105 @@ footer a {
   color: #ff9800; /* Match your login button color */
   text-decoration: underline;
 }
+/* Welcome section */
+.welcome-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Intro */
+.welcome-intro {
+  text-align: center;
+  margin-bottom: 30px; /* tighter gap */
+}
+
+.welcome-intro h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #111; /* high contrast for "Welcome to" */
+  letter-spacing: 0.5px;
+}
+
+.welcome-intro h1 .brand {
+  color: #007B46; /* deep green (your brand accent) */
+  font-weight: 900;
+}
+
+.welcome-intro h1::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: #007B46; /* underline in brand color */
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+
+.welcome-intro p {
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.5;  /* reduced line spacing */
+  margin: 6px auto;  /* small gap instead of big space */
+  max-width: 850px;
+}
+
+/* Split content */
+.welcome-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 25px; /* smaller gap between text and image */
+}
+
+/* Text content */
+.welcome-content {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.welcome-content p {
+  margin: 8px 0; /* reduced spacing */
+}
+
+.welcome-content ul {
+  margin: 12px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.welcome-content ul li {
+  margin-bottom: 8px; /* tighter list */
+  font-size: 1.02rem;
+}
+
+/* Image */
+.welcome-image img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Mobile adjustments */
+@media (max-width: 900px) {
+  .welcome-split {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .welcome-image {
+    order: -1; /* image first */
+  }
+
+  .welcome-content ul {
+    text-align: left;
+    display: inline-block;
+  }
+}
+
+
+
